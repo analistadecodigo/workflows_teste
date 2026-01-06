@@ -14,7 +14,7 @@ on:
           - 'Build Only'
           - 'Build + Push to Docker Hub'
 jobs:
-  call-docker:
+  call-build:
     uses: valdirsantos714/reusable_workflows/.github/workflows/build-java.yaml@main
     with:
       working-directory: infocep
