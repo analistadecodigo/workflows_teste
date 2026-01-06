@@ -1,0 +1,20 @@
+name: Manual Verification
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      execution_mode:
+        description: 'Select execution mode'
+        type: choice
+        default: 'Build Only'
+        options:
+          - 'Build Only'
+          - 'Build + Push to Docker Hub'
+jobs:
+  call-docker:
+    uses: valdirsantos714/reusable_workflows/.github/workflows/build-java.yaml
+    with:
+      push_image: ${{ github.event.inputs.execution_mode == 'Build + Push to Docker Hub' }}
