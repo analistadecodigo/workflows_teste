@@ -20,6 +20,7 @@ jobs:
       working-directory: infocep
       java-version: '17'
       push-image: ${{ github.event.inputs.execution_mode == 'Build + Push to Docker Hub' }}
+      docker-image-name: ${{ secrets.DOCKERHUB_USERNAME }}/infocep-backend
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
