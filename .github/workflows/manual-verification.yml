@@ -17,7 +17,9 @@ jobs:
   call-docker:
     uses: valdirsantos714/reusable_workflows/.github/workflows/build-java.yaml@main
     with:
-      push_image: ${{ github.event.inputs.execution_mode == 'Build + Push to Docker Hub' }}
+      working-directory: infocep
+      java-version: '17'
+      push-image: ${{ github.event.inputs.execution_mode == 'Build + Push to Docker Hub' }}
     secrets:
       DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
       DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
