@@ -81,6 +81,12 @@ jobs:
           pre_release_branches: develop
           pre_release_suffix: dev
           default_bump: patch
+      
+      - name: Normalize branch name
+        if: inputs.push-image
+        id: branch
+        run: |
+          echo "value=${GITHUB_REF_NAME//\//-}" >> $GITHUB_OUTPUT
 
       - name: Validate Docker secrets and image name
         if: inputs.push-image
@@ -110,5 +116,5 @@ jobs:
           context: ${{ inputs.working-directory }}
           push: true
           tags: |
-            ${{ inputs.docker-image-name }}:${{ steps.semver.outputs.new_tag }}
-            ${{ inputs.docker-image-name }}:${{ github.ref_name }}
+             ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.docker-image-name }}:${{ steps.semver.outputs.new_tag }}
+             ${{ secrets.DOCKERHUB_USERNAME }}/${{ inputs.docker-image-name }}:${{ steps.branch.outputs.value }}
