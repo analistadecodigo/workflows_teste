@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       execution_mode:
-        description: 'Select execution mode'
+        description: 'Select Execution Mode'
         type: choice
         default: 'Build Only'
         options:
