@@ -8,8 +8,9 @@ on:
     branches: main
 jobs:
   build-backend:
-    uses: valdirsantos714/reusable_workflows/.github/workflows/build-java.yaml@main
+    uses: ./.github/workflows/build-java.yaml
     with:
       working-directory: 'infocep'
       java-version: '17'
-      push-image: false
+      push-image: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      docker-image-name: infocep-backend
