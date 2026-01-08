@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
         - name: backend
-          image: analistadecodigo/infocep-backend:v0.2.0-develop.0
-          imagePullPolicy: Always
+          image: analistadecodigo/infocep-backend:main
+          imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
           readinessProbe:
