@@ -125,6 +125,30 @@ jobs:
 
           git commit -m "chore: update k8s image tag to ${{ steps.semver.outputs.new_tag }}"
           git push
+      
+      - name: Update pom.xml version with SemVer
+        if: github.ref_name == 'main' && inputs.push-image
+        working-directory: infocep
+        run: |
+          mvn versions:set \
+            -DnewVersion=${{ steps.semver.outputs.new_tag }} \
+            -DgenerateBackupPoms=false
+
+      - name: Commit pom.xml version update
+        if: github.ref_name == 'main' && inputs.push-image
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add infocep/pom.xml
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+
+          git commit -m "chore: bump version to ${{ steps.semver.outputs.new_tag }}"
+          git push
 
       - name: Docker Login
         if: inputs.push-image
