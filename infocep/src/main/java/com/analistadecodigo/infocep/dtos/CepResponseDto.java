@@ -5,6 +5,8 @@ import lombok.Data;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CepResponseDto {
     private String cep;
     private String logradouro;
