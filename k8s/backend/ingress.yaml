@@ -4,17 +4,17 @@ metadata:
   name: infocep-ingress
   namespace: infocep
   annotations:
-    kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: nginx
   rules:
-  - host: infocep.local
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: infocep-backend
-            port:
-              number: 80
+    - host: infocep.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: infocep-backend
+                port:
+                  number: 80
