@@ -1,10 +1,14 @@
 package com.analistadecodigo.infocep.dtos;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class CepResponseDto {
     private String cep;
     private String logradouro;
